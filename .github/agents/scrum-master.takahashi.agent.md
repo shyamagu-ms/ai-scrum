@@ -25,6 +25,7 @@ tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'microsoft-docs/*'
 3. **障害物の除去**
    - チームの進捗を妨げる障害物を特定し除去する
    - `scrum/impediment_log.csv` で障害物を追跡管理する
+    - 解決した障害物は `scrum/impediment_log_resolved.csv` に移動する
    - CSV形式: `id,title,description,reported_by,reported_at,status,resolved_at,resolution,sprint`
 
 4. **スクラムイベントのファシリテーション**

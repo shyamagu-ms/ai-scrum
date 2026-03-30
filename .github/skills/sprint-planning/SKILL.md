@@ -6,10 +6,10 @@ description: スプリントプランニングを実施する。PO、SM、開発
 # スプリントプランニング開始
 
 ## 準備
-- サブエージェントとして、鈴木エージェント(`.github/agents/product-owner.suzuki.agent.md`)をモデル"Claude Opus 4.6(fast mode)"で実行します。
-- サブエージェントとして、伊藤エージェント(`.github/agents/developer.ito.agent.md`)をモデル"Claude Opus 4.6(fast mode)"で実行します。
-- サブエージェントとして、田中エージェント(`.github/agents/developer.tanaka.agent.md`)をモデル"GPT-5.3-Codex"で実行します。
-- サブエージェントとして、高橋エージェント(`.github/agents/scrum-master.takahashi.agent.md`)をモデル"Claude Opus 4.6(fast mode)"で実行します。
+- サブエージェントとして、鈴木エージェント(`.github/agents/product-owner.suzuki.agent.md`)をモデル"Claude Opus 4.6"で実行します。
+- サブエージェントとして、伊藤エージェント(`.github/agents/developer.ito.agent.md`)をモデル"Claude Opus 4.6"で実行します。
+- サブエージェントとして、田中エージェント(`.github/agents/developer.tanaka.agent.md`)をモデル"Claude Opus 4.6"で実行します。
+- サブエージェントとして、高橋エージェント(`.github/agents/scrum-master.takahashi.agent.md`)をモデル"Claude Opus 4.6"で実行します。
 
 なお、スプリントは全部で5日間で計画します。(1週間スプリントです)
 開発者（田中・伊藤）は世界でも有数のエキスパートエンジニアです。極めて高い生産性を前提とした計画を立てることが可能です。
@@ -20,10 +20,14 @@ description: スプリントプランニングを実施する。PO、SM、開発
 2. `scrum/product_backlog.csv` を読み、優先順位の高いPBIを確認する
 3. `scrum/definition_of_done.md` を読み、完成の定義を確認する
 4. `scrum/velocity.csv` を読み、過去のベロシティを確認する
+5. `scrum/order/orderXXX.md` を読み、最新のユーザサイドの要求事項や依頼事項を確認する（※XXXは最新の番号のものを確認）
+6. `scrum/mandatory_deliverables.md` を読み、顧客から**必ず**作成することを要求されている成果物を確認する
+7. `scrum/sprintZZZ/sprint_retrospective.md` を読み、前回スプリントの振り返り結果を確認する（※ZZZは前回分のスプリントの番号の内容を確認）
 
 ## 対象スプリント
-`scrum/sprintXXX` (XXXは連番)、スプリントプランニングにあたって`scrum/sprint(XXX+1)`フォルダを作成し、その中に成果物を記録します。
-対象となるスプリント番号はXXX+1となります。
+対象スプリントは、スプリントプランニング時に新規作成する`scrum/sprintXXX`とします。
+XXXは、既存のsprintフォルダと重複しない未使用の最小連番を採番します。
+例: すでに`scrum/sprint001`が存在する場合、今回のスプリントは`scrum/sprint002`になります。
 
 ## トピック1: なぜこのスプリントは価値があるのか？（Why）
 - 鈴木エージェントから、プロダクトオーナーの立場でスプリントの価値提案を行ってください
@@ -48,6 +52,7 @@ description: スプリントプランニングを実施する。PO、SM、開発
 - `scrum/sprint${sprint_number}/sprint_planning.md` にプランニングの結果を記録する
 - `scrum/sprint${sprint_number}/sprint_backlog.md` にスプリントバックログを作成する
 - `scrum/product_backlog.csv` の選択したPBIのステータスを更新する
+(記録は必要な要素を落とさずに、一方でできるだけ簡潔に短く記載すること)
 
 ## ファシリテーション
 高橋エージェントを使い、以下を確認してください：

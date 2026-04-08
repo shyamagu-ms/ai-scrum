@@ -166,6 +166,59 @@ This skill runs all of Steps 1–7 in a single execution.
 
 ---
 
+## GitHub Agentic Workflow
+
+This template can also be used with **GitHub Agentic Workflow (gh-aw)**.  
+For details, see the official site: **<https://github.github.com/gh-aw/>**
+
+> [!CAUTION]
+> GitHub Agentic Workflow is a very new service. **You must verify behavior with the latest version before use.** Specifications and features may change without notice.
+
+### Setup
+
+#### 1. Install the CLI extension
+
+If you haven't installed it yet, run:
+
+```bash
+gh extension install github/gh-aw
+```
+
+#### 2. Compile before use
+
+Always compile before running:
+
+```bash
+gh aw compile
+```
+
+#### 3. Required tokens
+
+The following two environment variables must be set:
+
+| Token | Description |
+|---|---|
+| `GH_AW_GITHUB_TOKEN` | GitHub personal access token |
+| `COPILOT_GITHUB_TOKEN` | Copilot GitHub token |
+
+Both tokens require **Read and Write access** to:
+- **Code**
+- **Pull requests**
+- **Workflows**
+
+#### 4. Repository settings
+
+The following settings must be configured on your repository:
+
+- **Copilot Coding Agent + Agentic Workflows**: Enabled
+- **Actions permissions**: Allow the following actions:
+  - `github/gh-aw-actions`
+  - `microsoft/apm-action`
+  - `actions/*`
+- **Workflow permissions**: Read and Write permissions + Allow GitHub Actions to create pull requests
+
+---
+
 ## Rules
 
 - All artifacts follow the **Scrum Guide 2020**

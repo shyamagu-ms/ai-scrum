@@ -154,6 +154,39 @@ If there are no changes to the request, you can resume from Step 4 (Sprint Plann
 
 ---
 
+## Utility Skills
+
+These skills can be used at any time, independent of the sprint workflow.
+
+### Ask the Product Owner — `/ask-to-po-suzuki`
+
+```
+/ask-to-po-suzuki
+```
+
+Starts an interactive dialogue session with the Product Owner (Suzuki).  
+You can ask questions, request information from project files, and add or modify PBIs in the Product Backlog.
+
+### User Review — `/human-review`
+
+```
+/human-review
+```
+
+Conducts a review session for the user (supervisor/stakeholder).  
+The Scrum Team explains progress — per sprint or across the entire product — by showing actual web screens, and collects feedback from the user.
+
+### Full Security Audit — `/full-security-audit`
+
+```
+/full-security-audit
+```
+
+Performs a comprehensive security assessment of the entire project.  
+Runs six security reviews (source code, supply chain, configuration files, threat modeling, Scrum process, and cloud environment) in sequence, and produces a consolidated audit report under `security/reviewsXXX/`.
+
+---
+
 ## Batch Execution (Experimental)
 
 ```

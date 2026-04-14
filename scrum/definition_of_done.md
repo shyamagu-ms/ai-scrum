@@ -70,6 +70,4 @@
 
 ## 更新履歴
 
-| 日付 | 更新内容 | 更新者 |
-|------|----------|--------|
-| YYYY-MM-DD | 初版作成 | （更新者） |
+更新履歴は [definition_of_done_history.md](definition_of_done_history.md) を参照。

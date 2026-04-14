@@ -70,10 +70,16 @@ jobs:
             next_sprint_number="001"
           fi
 
+          pr_head="${GITHUB_REPOSITORY_OWNER}:${PR_BRANCH_NAME}"
           pr_title="[ai-sprint] Sprint ${next_sprint_number} - スプリント成果物集約PR"
 
-          pr_number=$(gh pr list --head "${PR_BRANCH_NAME}" --state open --json number --jq '.[0].number // ""')
-          pr_url=$(gh pr list --head "${PR_BRANCH_NAME}" --state open --json url --jq '.[0].url // ""')
+          read -r pr_number pr_url < <(
+            gh pr list \
+              --head "${pr_head}" \
+              --state open \
+              --json number,url \
+              --jq '(.[0] // {}) | [(.number // ""), (.url // "")] | @tsv'
+          )
 
           if [[ -z "${pr_number}" ]]; then
             if git ls-remote --exit-code --heads origin "${PR_BRANCH_NAME}" >/dev/null 2>&1; then
@@ -85,15 +91,37 @@ jobs:
               git push origin "${PR_BRANCH_NAME}"
             fi
 
-            gh pr create \
+            created_pr_url=$(
+              gh pr create \
               --draft \
               --base "${GITHUB_REF_NAME}" \
               --head "${PR_BRANCH_NAME}" \
               --title "${pr_title}" \
-              --body "このPRはスクラムイベント分割実行の成果物を集約するために作成されました。初回は空コミットのみを含み、planning 以降の成果物が順次積み増されます。"
+              --body "このPRはスクラムイベント分割実行の成果物を集約するために作成されました。初回は空コミットのみを含み、planning 以降の成果物が順次積み増されます。" |
+                tail -n 1
+            )
 
-            pr_number=$(gh pr list --head "${PR_BRANCH_NAME}" --state open --json number --jq '.[0].number // ""')
-            pr_url=$(gh pr list --head "${PR_BRANCH_NAME}" --state open --json url --jq '.[0].url // ""')
+            created_pr_url="${created_pr_url//$'\r'/}"
+            if [[ "${created_pr_url}" =~ ^https://github\.com/.+/pull/[0-9]+$ ]]; then
+              pr_url="${created_pr_url}"
+              pr_number="${created_pr_url##*/}"
+            fi
+          fi
+
+          if [[ -z "${pr_number}" || -z "${pr_url}" ]]; then
+            for attempt in 1 2 3 4 5; do
+              read -r pr_number pr_url < <(
+                gh pr list \
+                  --head "${pr_head}" \
+                  --state open \
+                  --json number,url \
+                  --jq '(.[0] // {}) | [(.number // ""), (.url // "")] | @tsv'
+              )
+              if [[ -n "${pr_number}" && -n "${pr_url}" ]]; then
+                break
+              fi
+              sleep "${attempt}"
+            done
           fi
 
           if [[ -z "${pr_number}" || -z "${pr_url}" ]]; then
@@ -108,6 +136,7 @@ jobs:
     name: Sprint Planning
     needs: initialize-pr
     permissions:
+      actions: read
       contents: write
       pull-requests: write
     uses: ./.github/workflows/scrum-events-worker-planning.lock.yml
@@ -139,6 +168,7 @@ jobs:
       - initialize-pr
       - verify-planning
     permissions:
+      actions: read
       contents: write
       pull-requests: write
     uses: ./.github/workflows/scrum-events-worker-day.lock.yml
@@ -170,6 +200,7 @@ jobs:
       - initialize-pr
       - verify-day1
     permissions:
+      actions: read
       contents: write
       pull-requests: write
     uses: ./.github/workflows/scrum-events-worker-day.lock.yml
@@ -201,6 +232,7 @@ jobs:
       - initialize-pr
       - verify-day2
     permissions:
+      actions: read
       contents: write
       pull-requests: write
     uses: ./.github/workflows/scrum-events-worker-day.lock.yml
@@ -232,6 +264,7 @@ jobs:
       - initialize-pr
       - verify-day3
     permissions:
+      actions: read
       contents: write
       pull-requests: write
     uses: ./.github/workflows/scrum-events-worker-day.lock.yml
@@ -263,6 +296,7 @@ jobs:
       - initialize-pr
       - verify-day4
     permissions:
+      actions: read
       contents: write
       pull-requests: write
     uses: ./.github/workflows/scrum-events-worker-day.lock.yml
@@ -294,6 +328,7 @@ jobs:
       - initialize-pr
       - verify-day5
     permissions:
+      actions: read
       contents: write
       pull-requests: write
     uses: ./.github/workflows/scrum-events-worker-review.lock.yml
@@ -325,6 +360,7 @@ jobs:
       - initialize-pr
       - verify-review
     permissions:
+      actions: read
       contents: write
       pull-requests: write
     uses: ./.github/workflows/scrum-events-worker-retrospective.lock.yml

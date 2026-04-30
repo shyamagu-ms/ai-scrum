@@ -6,7 +6,7 @@ description: 上長(ユーザ)不在時に、依頼事項のメモ(scrum/order/o
 # 依頼事項メモの作成・更新
 
 ## 準備
-- サブエージェントとして、佐藤エージェント(`.github/agents/customer.sato.agent.md`)をモデル"Claude Opus 4.6"で実行します。
+- サブエージェントとして、佐藤エージェント(`.github/agents/customer.sato.agent.md`)をモデル"Claude Opus 4.7"で実行します。
 
 ## 手順
 1. 佐藤エージェントで、`scrum/order/orderXXX.md` を読み、内容を理解する（XXXは最新の番号のみを確認します。）

@@ -167,6 +167,15 @@ These skills can be used at any time, independent of the sprint workflow.
 Starts an interactive dialogue session with the Product Owner (Suzuki).  
 You can ask questions, request information from project files, and add or modify PBIs in the Product Backlog.
 
+### Ad-hoc Sprint — `/adhoc-sprint`
+
+```
+/adhoc-sprint
+```
+
+Handles ad-hoc / one-off requests from the user without going through the full Scrum cycle.  
+The Product Owner (Suzuki) receives the request and dispatches tasks to the appropriate sub-agents (developers, Scrum Master, reviewer), iterating with reviews from Kobayashi until the user's request is satisfied.
+
 ### User Review — `/human-review`
 
 ```
@@ -184,6 +193,14 @@ The Scrum Team explains progress — per sprint or across the entire product —
 
 Performs a comprehensive security assessment of the entire project.  
 Runs six security reviews (source code, supply chain, configuration files, threat modeling, Scrum process, and cloud environment) in sequence, and produces a consolidated audit report under `security/reviewsXXX/`.
+
+### Mindset — `/my-mindset`
+
+```
+/my-mindset
+```
+
+A short skill that has the agent recite its working mindset — committing to perform the instructed task faithfully and thoroughly without cutting corners or letting custom agents do the work in its place. Useful as a reminder before starting important work.
 
 ---
 

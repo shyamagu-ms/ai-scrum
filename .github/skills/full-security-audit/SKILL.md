@@ -9,16 +9,13 @@ description: >
 # 包括的セキュリティ監査の実施
 
 ## 準備
-- サブエージェントとして、渡辺エージェント(`.github/agents/security.watanabe.agent.md`)をモデル"GPT 5.4"で実行します。
-- サブエージェントとして、鈴木エージェント(`.github/agents/product-owner.suzuki.agent.md`)をモデル"Claude Opus 4.6"で実行します。
-- サブエージェントとして、高橋エージェント(`.github/agents/scrum-master.takahashi.agent.md`)をモデル"Claude Opus 4.6"で実行します。
+- サブエージェントとして、渡辺エージェント(`.github/agents/security.watanabe.agent.md`)をモデル"GPT 5.5"で実行します。
+- サブエージェントとして、鈴木エージェント(`.github/agents/product-owner.suzuki.agent.md`)をモデル"Claude Opus 4.7"で実行します。
+- サブエージェントとして、高橋エージェント(`.github/agents/scrum-master.takahashi.agent.md`)をモデル"Claude Opus 4.7"で実行します。
 
 ## 目的
 
 プロジェクト全体のセキュリティ状態を一括で評価する。以下の6つのレビューを順序立てて実施し、統合された監査報告書を作成する。
-
-**重要な告知**
-今回は、Azure環境のシステムレビューは省略することになりました。Azureシステム監査は実施せず、5つのレビューを実施して下さい。
 
 ## 成果物の配置場所
 - 監査報告書はルートフォルダ直下に、`/security/reviewsXXX/`（※XXXは001から始まる連番、最新の番号+1を作成する）に配置する
@@ -32,6 +29,12 @@ description: >
 - 対象プロジェクトのディレクトリ構造と技術スタック
 - スクラム成果物（`scrum/` フォルダ）の有無
 - Azure環境の有無（Azure CLIのログイン状態や該当するAzureリソースの有無）
+ - 対象となるリソースグループは以下
+  - rg-planova-dev-eastasia-001
+  - rg-planova-staging-eastasia-001
+  - rg-planova-prod-eastasia-001
+  - rg-planova-spike-eastasia-001
+
 - 存在しないリソースに対するレビューはスキップする
 
 ### Phase 2: 各レビューの実施
@@ -46,8 +49,6 @@ description: >
 | 3 | `config-security-review` | 設定ファイル・構成管理 | Dockerfile、CI/CD、IaCファイルが一切存在しない場合 |
 | 4 | `threat-modeling` | 脅威モデリング | （常に実施推奨） |
 | 5 | `supply-chain-security-review` | サプライチェーン | パッケージ管理ファイルが存在しない場合 |
-
-**以下のスキルはAzure本番環境が存在しないため、今回はスキップすることとします。**
 | 6 | `azure-cloud-security-review` | Azureクラウド | Azure CLIが未ログインまたはAzureリソースが存在しない場合 |
 
 ### Phase 3: 監査報告書の作成
@@ -92,6 +93,14 @@ description: >
 （総合的な評価と今後のアクション）
 ```
 
+### Phase 4: 監査報告書のスクラムチーム取り込み
+
 4. 改善ロードマップに基づき、バックログへのセキュリティPBI追加、セキュリティ障害追加を鈴木エージェントと高橋エージェントに提案する
 鈴木エージェントは改善ロードマップ内容を確認し、渡辺エージェントと確認しながらPBIを更新します。
 高橋エージェントは改善ロードマップ内容を確認し、渡辺エージェントと確認しながら障害リストを更新します。
+
+### Phase 5: リポジトリへの反映
+
+5. 監査報告書と各レビューの発見事項を高橋エージェントを用いて、mainリポジトリに反映する
+ - 最後に git pull origin main を実行し、差分を確認・取得します。
+

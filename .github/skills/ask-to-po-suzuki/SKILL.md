@@ -7,7 +7,7 @@ description: プロダクトオーナー鈴木との対話型セッション
 
 - **鈴木エージェント**を以下の構成で起動してください。
   - 役割：Product Owner  
-  - モデル：Claude Opus 4.6
+  - モデル：Claude Opus 4.7
   - 定義：`.github/agents/product-owner.suzuki.agent.md`
 
 # セッション実施

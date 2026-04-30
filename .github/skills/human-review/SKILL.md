@@ -16,17 +16,17 @@ description: ユーザ(上長）向けのレビューを実施する。スプリ
 
 - **鈴木エージェント**  
   - 役割：Product Owner  
-  - モデル：Claude Opus 4.6
+  - モデル：Claude Opus 4.7
   - 定義：`.github/agents/product-owner.suzuki.agent.md`
 
 - **田中エージェント**  
   - 役割：Developer  
-  - モデル：Claude Opus 4.6
+  - モデル：Claude Opus 4.7
   - 定義：`.github/agents/developer.tanaka.agent.md`
 
 - **高橋エージェント**  
   - 役割：Scrum Master  
-  - モデル：Claude Opus 4.6
+  - モデル：Claude Opus 4.7
   - 定義：`.github/agents/scrum-master.takahashi.agent.md`
 
 ---

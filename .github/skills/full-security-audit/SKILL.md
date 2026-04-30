@@ -29,12 +29,7 @@ description: >
 - 対象プロジェクトのディレクトリ構造と技術スタック
 - スクラム成果物（`scrum/` フォルダ）の有無
 - Azure環境の有無（Azure CLIのログイン状態や該当するAzureリソースの有無）
- - 対象となるリソースグループは以下
-  - rg-planova-dev-eastasia-001
-  - rg-planova-staging-eastasia-001
-  - rg-planova-prod-eastasia-001
-  - rg-planova-spike-eastasia-001
-
+ - 対象となるリソースグループはが不明な場合は確認すること（全てのRGを対象にはしない）
 - 存在しないリソースに対するレビューはスキップする
 
 ### Phase 2: 各レビューの実施

@@ -9,6 +9,9 @@
 ## スクラムチームワーキングカルチャー
 [スクラムチームカルチャー](../scrum/scrum_team_culture.md)を**定着した文化として徹底**すること
 
+## Git運用規約
+[Git運用規約](../scrum/git-operation-policy.md)を遵守すること（PRラベル・worktree運用など）
+
 ## スクラムチームの体制
 - 顧客: 佐藤
 - プロダクトオーナー（PO）: 鈴木
@@ -24,6 +27,7 @@
 scrum/                          # スクラム成果物
 ├── team_working_agreement.md   # チームワーキングアグリーメント
 ├── scrum_team_culture.md       # スクラムチームカルチャー
+├── git-operation-policy.md     # Git運用規約
 └── order/                      # エンドユーザサイドの要求事項や依頼事項
 │   └── orderXXX.md             # 個別の要求事項ファイル（XXXは連番。常に最新のみを確認する）
 ├── product_goal.md             # プロダクトゴール
@@ -74,7 +78,3 @@ wiki/                           # wiki成果物(あれば)
 - pythonの場合、現在の環境にある仮想環境(.venv)を使用すること
 - 全てのドキュメントへの記載は、簡潔でわかりやすく可能な限り短く記載すること
 
-## PRラベルルール（GitHub Copilot Coding Agent用）
-
-Issueに `sprint/*` または `test/*` ラベルが付いている場合、作成するPRにも同じラベルを付与すること。
-PRの本文には、対応するIssue番号を `Fixes #<issue番号>` の形式で必ず含めること。
